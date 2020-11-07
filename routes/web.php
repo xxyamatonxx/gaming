@@ -23,5 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/auth/{service}', 'OAuthLoginController@getTwitterAuth')->where('service', 'twitter');
 Route::get('/auth/{service}/logout', 'OAuthLoginController@logout')->where('service', 'twitter');
-Route::get('/auth/twitter/callback', 'OAuthLoginController@authTwitterCallback');
+Route::get('/auth/{service}/callback', 'OAuthLoginController@authTwitterCallback');
 

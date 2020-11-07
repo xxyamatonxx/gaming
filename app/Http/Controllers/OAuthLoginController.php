@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use Socialite;
-use Auth;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
 
 class OAuthLoginController extends Controller
 {
@@ -13,16 +13,15 @@ class OAuthLoginController extends Controller
     {
         return Socialite::driver($provider)->redirect();
     }
-       public function logout(Request $request)
+    
+    public function authTwitterCallback($provider)
     {
-         Auth::logout();
-        return redirect('/');
+        $user = Socialite::driver($provider)->user();
+        dd($user->token);
     }
-
-    public function authTwitterCallback()
+    public function logout(Request $request)
     {
-        $data = Socialite::driver('twitter')->user();
-        print_r($data);
-        die;
+      Auth::logout();
+     return redirect('/');
     }
 }
