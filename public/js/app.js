@@ -49752,6 +49752,8 @@ var app = new Vue({
   el: '#app'
 });
 
+__webpack_require__(/*! ./skyway.js */ "./resources/js/skyway.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -49865,6 +49867,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/skyway.js":
+/*!********************************!*\
+  !*** ./resources/js/skyway.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var localStream; // カメラ映像取得
+
+navigator.mediaDevices.getUserMedia({
+  video: true,
+  audio: true
+}).then(function (stream) {
+  // 成功時にvideo要素にカメラ映像をセットし、再生
+  var videoElm = document.getElementById('my-video');
+  videoElm.srcObject = stream;
+  videoElm.play(); // 着信時に相手にカメラ映像を返せるように、グローバル変数に保存しておく
+
+  localStream = stream;
+})["catch"](function (error) {
+  // 失敗時にはエラーログを出力
+  console.error('mediaDevice.getUserMedia() error:', error);
+  return;
+}); //Peer作成
+
+var peer = new Peer({
+  key: '693d2132-b347-4ff2-be1a-5ee0abc5a173',
+  debug: 3
+}); //PeerID取得
+
+peer.on('open', function () {
+  document.getElementById('my-id').textContent = peer.id;
+});
 
 /***/ }),
 

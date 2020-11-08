@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'TopController@index')->name('top');
+Route::get('/random/tell', 'RandomTellController@create')->name('random_tell.create');
+Route::get('/room/create', 'TellRoomController@create')->name('tell_room.create');
 
 
+//TwitterOAuth
 Route::get('/auth/{service}', 'OAuthLoginController@getTwitterAuth')->where('service', 'twitter');
 Route::get('/auth/{service}/logout', 'OAuthLoginController@logout')->where('service', 'twitter');
 Route::get('/auth/{service}/callback', 'OAuthLoginController@authTwitterCallback');

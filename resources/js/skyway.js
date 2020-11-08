@@ -18,3 +18,15 @@ navigator.mediaDevices.getUserMedia({
     console.error('mediaDevice.getUserMedia() error:', error);
     return;
   });
+
+//Peer作成
+const peer = new Peer({
+  key: '693d2132-b347-4ff2-be1a-5ee0abc5a173',
+  debug: 3
+});
+
+//PeerID取得
+peer.on('open', () => {
+  document.getElementById('my-id').textContent = peer.id;
+});
+
