@@ -49902,6 +49902,28 @@ var peer = new Peer({
 
 peer.on('open', function () {
   document.getElementById('my-id').textContent = peer.id;
+}); // 発信処理
+
+document.getElementById('make-call').onclick = function () {
+  var theirID = document.getElementById('their-id').value;
+  var mediaConnection = peer.call(theirID, localStream);
+  setEventListener(mediaConnection);
+}; // イベントリスナを設置する関数
+
+
+var setEventListener = function setEventListener(mediaConnection) {
+  mediaConnection.on('stream', function (stream) {
+    // video要素にカメラ映像をセットして再生
+    var videoElm = document.getElementById('their-video');
+    videoElm.srcObject = stream;
+    videoElm.play();
+  });
+}; //着信処理
+
+
+peer.on('call', function (mediaConnection) {
+  mediaConnection.answer(localStream);
+  setEventListener(mediaConnection);
 });
 
 /***/ }),

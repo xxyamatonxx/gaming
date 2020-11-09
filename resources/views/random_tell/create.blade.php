@@ -10,4 +10,6 @@
 <button id="make-call">発信</button>
 <video id="their-video" width="400px" autoplay muted playsinline></video>
 
+
+
 @endsection
