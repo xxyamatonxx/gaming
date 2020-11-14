@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,14 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
+// Route::get('/', 'TopController@index')->name('top');
+// Route::get('/random/tell', 'RandomTellController@create')->name('random_tell.create');
+// Route::get('/room/create', 'TellRoomController@create')->name('tell_room.create');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+//TwitterOAuth
+// Route::get('/auth/{service}', 'OAuthLoginController@getTwitterAuth')->where('service', 'twitter');
+// Route::get('/auth/{service}/logout', 'OAuthLoginController@logout')->where('service', 'twitter');
+// Route::get('/auth/{service}/callback', 'OAuthLoginController@authTwitterCallback');
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/{any}', function() {
+     return view('layouts.app');
+ })->where('any', '.*');
